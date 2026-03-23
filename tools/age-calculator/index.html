@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Age Calculator - Exact Age in Years, Months and Days</title>
+  <meta name="description" content="Free age calculator. Find exact age from date of birth instantly.">
+  <link rel="canonical" href="https://example.com/tools/age-calculator/">
+  <meta name="robots" content="index,follow">
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+  <main class="wrap">
+    <p class="breadcrumbs"><a href="/">Home</a> / Age Calculator</p>
+    <section class="tool-box">
+      <h1>Age Calculator</h1>
+      <label for="dob">Date of birth</label>
+      <input id="dob" type="date">
+      <button onclick="calcAge()">Calculate age</button>
+      <div class="result" id="result">Your exact age will appear here.</div>
+    </section>
+    <section class="content"><div class="ad-slot">AdSense in-content placeholder</div></section>
+  </main>
+  <script>
+    function calcAge() {
+      const value = document.getElementById('dob').value;
+      if (!value) return document.getElementById('result').textContent = 'Please choose a date.';
+      const dob = new Date(value + 'T00:00:00');
+      const today = new Date();
+      let years = today.getFullYear() - dob.getFullYear();
+      let months = today.getMonth() - dob.getMonth();
+      let days = today.getDate() - dob.getDate();
+      if (days < 0) {
+        months -= 1;
+        const prevMonth = new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+        days += prevMonth;
+      }
+      if (months < 0) {
+        years -= 1;
+        months += 12;
+      }
+      document.getElementById('result').innerHTML = `<strong>${years}</strong> years, <strong>${months}</strong> months, <strong>${days}</strong> days`;
+    }
+  </script>
+</body>
+</html>

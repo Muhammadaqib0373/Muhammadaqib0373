@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Word Counter - Count Words and Characters Online</title>
+  <meta name="description" content="Free online word counter. Count words, characters, sentences, and paragraphs instantly.">
+  <link rel="canonical" href="https://example.com/tools/word-counter/">
+  <meta name="robots" content="index,follow">
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+  <main class="wrap">
+    <p class="breadcrumbs"><a href="/">Home</a> / Word Counter</p>
+    <section class="tool-box">
+      <h1>Word Counter</h1>
+      <textarea id="text" rows="12" placeholder="Paste or type your text here..." oninput="countText()"></textarea>
+      <div class="result" id="result">Words: 0<br>Characters: 0<br>Sentences: 0<br>Paragraphs: 0</div>
+    </section>
+  </main>
+  <script>
+    function countText() {
+      const text = document.getElementById('text').value;
+      const words = (text.trim().match(/\S+/g) || []).length;
+      const chars = text.length;
+      const sentences = (text.match(/[.!?]+/g) || []).length;
+      const paragraphs = text.trim() ? text.trim().split(/\n\s*\n/).length : 0;
+      document.getElementById('result').innerHTML = `Words: <strong>${words}</strong><br>Characters: <strong>${chars}</strong><br>Sentences: <strong>${sentences}</strong><br>Paragraphs: <strong>${paragraphs}</strong>`;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UAE VAT Calculator (5%) - Add or Remove VAT Online</title>
+  <meta name="description" content="Free UAE VAT calculator. Add 5% VAT or remove VAT from an amount instantly.">
+  <link rel="canonical" href="https://example.com/tools/uae-vat-calculator/">
+  <meta name="robots" content="index,follow">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the UAE VAT rate?","acceptedAnswer":{"@type":"Answer","text":"The standard UAE VAT rate is 5%."}},{"@type":"Question","name":"How do I remove VAT from a total?","acceptedAnswer":{"@type":"Answer","text":"Divide the VAT-inclusive total by 1.05 to get the pre-VAT amount for a 5% rate."}}]}</script>
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+  <main class="wrap">
+    <p class="breadcrumbs"><a href="/">Home</a> / UAE VAT Calculator</p>
+    <section class="tool-box">
+      <h1>UAE VAT Calculator</h1>
+      <p>Enter an amount and choose whether you want to add VAT or remove VAT.</p>
+      <label for="amount">Amount (AED)</label>
+      <input id="amount" type="number" min="0" step="0.01" placeholder="1000">
+      <label for="mode">Calculation type</label>
+      <select id="mode">
+        <option value="add">Add 5% VAT</option>
+        <option value="remove">Remove 5% VAT</option>
+      </select>
+      <button onclick="calcVAT()">Calculate</button>
+      <div class="result" id="result">Your result will appear here.</div>
+    </section>
+    <section class="content">
+      <h2>How it works</h2>
+      <p>For adding VAT: total = amount × 1.05.</p>
+      <p>For removing VAT: base amount = total ÷ 1.05.</p>
+      <div class="ad-slot">AdSense in-content placeholder</div>
+    </section>
+  </main>
+  <script src="/assets/common.js"></script>
+  <script>
+    function calcVAT() {
+      const amount = parseFloat(byId('amount').value || '0');
+      const mode = byId('mode').value;
+      if (!amount) {
+        byId('result').innerHTML = 'Please enter an amount.';
+        return;
+      }
+      if (mode === 'add') {
+        const vat = amount * 0.05;
+        const total = amount + vat;
+        byId('result').innerHTML = `<strong>VAT:</strong> AED ${formatNumber(vat)}<br><strong>Total:</strong> AED ${formatNumber(total)}`;
+      } else {
+        const base = amount / 1.05;
+        const vat = amount - base;
+        byId('result').innerHTML = `<strong>Base amount:</strong> AED ${formatNumber(base)}<br><strong>VAT included:</strong> AED ${formatNumber(vat)}`;
+      }
+    }
+  </script>
+</body>
+</html>

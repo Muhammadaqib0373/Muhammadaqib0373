@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UAE Salary Breakdown Calculator | GulfTools</title>
+<meta name="description" content="Break a monthly salary into yearly, weekly, daily, and hourly income estimates.">
+<link rel="canonical" href="https://example.com/tools/uae-salary-calculator/index.html">
+<link rel="stylesheet" href="/assets/styles.css">
+<script defer src="/assets/common.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div class="container topbar-inner">
+    <a class="brand" href="/index.html"><span class="brand-mark"></span><span>GulfTools</span></a>
+    <nav class="nav">
+      <a href="/index.html">Home</a>
+      <a href="/tools/index.html">Tools</a>
+      <a href="/blog/index.html">Blog</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <div class="layout">
+    <aside class="sidebar card">
+      <h3>More tools</h3>
+      <a class="active" href="/tools/uae-salary-calculator/index.html">UAE Salary Breakdown Calculator</a>
+      <a href="/tools/uae-vat-calculator/index.html">UAE VAT Calculator</a><a href="/tools/uae-gratuity-calculator/index.html">UAE Gratuity Calculator</a><a href="/tools/loan-calculator/index.html">Loan Calculator</a><a href="/tools/emi-calculator/index.html">EMI Calculator</a>
+      <div class="ad-slot">Sidebar ad placeholder</div>
+    </aside>
+    <div class="content-card card">
+      <div class="tag">UAE Finance</div>
+      <h1>UAE Salary Breakdown Calculator</h1>
+      <p>Break a monthly salary into yearly, weekly, daily, and hourly income estimates.</p>
+      <section class="section" style="padding-top:8px">
+        <div class="form-grid"><div class="field"><label for="monthlySalary">Monthly salary</label><input id="monthlySalary" type="number" min="0" step="0.01" placeholder="12000"></div><div class="field"><label for="hoursPerWeek">Hours per week</label><input id="hoursPerWeek" type="number" min="1" step="0.5" value="48"></div></div>
+        <div class="cta-row"><button class="btn primary" onclick="calculate()">Calculate</button><a class="btn" href="/tools/index.html">Browse all tools</a></div>
+        <div id="result" class="result"><strong>Your result will appear here.</strong><div class="muted">Enter values and click calculate.</div></div>
+      </section>
+      <div class="ad-slot">In-content ad placeholder</div>
+      <section class="section"><h2>How this tool works</h2><p>A salary breakdown calculator gives users a quick way to understand what a monthly package means in practical terms. This is excellent for job comparisons, offer evaluation, and budget planning.</p></section>
+      <section class="section"><h2>Related tools</h2><div class="mini"><a class="pill" href="/tools/uae-vat-calculator/index.html">UAE VAT Calculator</a><a class="pill" href="/tools/uae-gratuity-calculator/index.html">UAE Gratuity Calculator</a><a class="pill" href="/tools/loan-calculator/index.html">Loan Calculator</a><a class="pill" href="/tools/emi-calculator/index.html">EMI Calculator</a></div></section>
+      <section class="section"><h2>Frequently asked questions</h2><div class="faqs"><div class="faq-item"><h3>Does the UAE have salary tax?</h3><p>This calculator is just a salary breakdown and does not apply payroll tax deductions.</p></div><div class="faq-item"><h3>Can I change the work hours?</h3><p>Yes. Adjust the weekly hours to estimate hourly pay.</p></div><div class="faq-item"><h3>Why does this matter for SEO?</h3><p>Salary tools attract users comparing jobs and budgeting decisions.</p></div></div></section>
+    </div>
+  </div>
+</main>
+<script>function calculate(){const monthly=parseFloat(byId('monthlySalary').value||0);const hoursPerWeek=parseFloat(byId('hoursPerWeek').value||48);if(monthly<=0||hoursPerWeek<=0){setResult('<strong>Enter valid values.</strong>');return;}const yearly=monthly*12;const weekly=yearly/52;const daily=yearly/365;const hourly=weekly/hoursPerWeek;setResult(`<strong>Yearly: ${money(yearly)}</strong><div class="muted">Weekly: ${money(weekly)} · Daily: ${money(daily)} · Hourly: ${money(hourly)}</div>`);}</script>
+
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="brand"><span class="brand-mark"></span><span>GulfTools</span></div>
+      <p>Premium, fast-loading tools for UAE finance, evergreen utilities, and text productivity. Built for Cloudflare Pages and easy expansion.</p>
+      <small>Replace placeholder domain, policies, and ad units before going live.</small>
+    </div>
+    <div><h3>Explore</h3><p><a href="/tools/index.html">All tools</a></p><p><a href="/blog/index.html">Blog</a></p><p><a href="/sitemap.xml">Sitemap</a></p></div>
+    <div><h3>Pages</h3><p><a href="/privacy.html">Privacy Policy</a></p><p><a href="/terms.html">Terms</a></p><p><a href="/contact.html">Contact</a></p></div>
+    <div><h3>Categories</h3><p><a href="/tools/index.html#uae-finance">UAE Finance</a></p><p><a href="/tools/index.html#evergreen">Evergreen</a></p><p><a href="/tools/index.html#text-tools">Text Tools</a></p></div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,1 +1,27 @@
-<urlset></urlset>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://example.com/index.html</loc></url>
+  <url><loc>https://example.com/tools/index.html</loc></url>
+  <url><loc>https://example.com/blog/index.html</loc></url>
+  <url><loc>https://example.com/about.html</loc></url>
+  <url><loc>https://example.com/privacy.html</loc></url>
+  <url><loc>https://example.com/terms.html</loc></url>
+  <url><loc>https://example.com/contact.html</loc></url>
+  <url><loc>https://example.com/tools/uae-vat-calculator/index.html</loc></url>
+  <url><loc>https://example.com/tools/uae-gratuity-calculator/index.html</loc></url>
+  <url><loc>https://example.com/tools/uae-salary-calculator/index.html</loc></url>
+  <url><loc>https://example.com/tools/loan-calculator/index.html</loc></url>
+  <url><loc>https://example.com/tools/emi-calculator/index.html</loc></url>
+  <url><loc>https://example.com/tools/age-calculator/index.html</loc></url>
+  <url><loc>https://example.com/tools/date-difference-calculator/index.html</loc></url>
+  <url><loc>https://example.com/tools/percentage-calculator/index.html</loc></url>
+  <url><loc>https://example.com/tools/discount-calculator/index.html</loc></url>
+  <url><loc>https://example.com/tools/bmi-calculator/index.html</loc></url>
+  <url><loc>https://example.com/tools/unit-converter/index.html</loc></url>
+  <url><loc>https://example.com/tools/word-counter/index.html</loc></url>
+  <url><loc>https://example.com/tools/case-converter/index.html</loc></url>
+  <url><loc>https://example.com/blog/how-to-calculate-vat-in-the-uae.html</loc></url>
+  <url><loc>https://example.com/blog/uae-gratuity-explained.html</loc></url>
+  <url><loc>https://example.com/blog/how-emi-is-calculated.html</loc></url>
+  <url><loc>https://example.com/blog/why-text-tools-rank-well.html</loc></url>
+</urlset>

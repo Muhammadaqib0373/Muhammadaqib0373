@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Word Counter | GulfTools</title>
-<meta name="description" content="Count words, characters, sentences, and paragraphs instantly.">
-<link rel="canonical" href="https://example.com/tools/word-counter/index.html">
+<title>Case Converter | GulfTools</title>
+<meta name="description" content="Convert text to uppercase, lowercase, title case, and sentence case.">
+<link rel="canonical" href="https://example.com/tools/case-converter/index.html">
 <link rel="stylesheet" href="/assets/styles.css">
 <script defer src="/assets/common.js"></script>
 </head>
@@ -26,27 +26,27 @@
   <div class="layout">
     <aside class="sidebar card">
       <h3>More tools</h3>
-      <a class="active" href="/tools/word-counter/index.html">Word Counter</a>
+      <a class="active" href="/tools/case-converter/index.html">Case Converter</a>
       <a href="/tools/uae-vat-calculator/index.html">UAE VAT Calculator</a><a href="/tools/uae-gratuity-calculator/index.html">UAE Gratuity Calculator</a><a href="/tools/uae-salary-calculator/index.html">UAE Salary Breakdown Calculator</a><a href="/tools/loan-calculator/index.html">Loan Calculator</a>
       <div class="ad-slot">Sidebar ad placeholder</div>
     </aside>
     <div class="content-card card">
       <div class="tag">Text Tools</div>
-      <h1>Word Counter</h1>
-      <p>Count words, characters, sentences, and paragraphs instantly.</p>
+      <h1>Case Converter</h1>
+      <p>Convert text to uppercase, lowercase, title case, and sentence case.</p>
       <section class="section" style="padding-top:8px">
-        <div class="form-grid"><div class="field" style="grid-column:1/-1"><label for="textInput">Paste your text</label><textarea id="textInput" placeholder="Type or paste text here..."></textarea></div></div>
+        <div class="form-grid"><div class="field" style="grid-column:1/-1"><label for="caseText">Paste your text</label><textarea id="caseText" placeholder="Paste text here..."></textarea></div><div class="field"><label for="caseMode">Output format</label><select id="caseMode"><option value="upper">UPPERCASE</option><option value="lower">lowercase</option><option value="title">Title Case</option><option value="sentence">Sentence case</option></select></div></div>
         <div class="cta-row"><button class="btn primary" onclick="calculate()">Calculate</button><a class="btn" href="/tools/index.html">Browse all tools</a></div>
         <div id="result" class="result"><strong>Your result will appear here.</strong><div class="muted">Enter values and click calculate.</div></div>
       </section>
       <div class="ad-slot">In-content ad placeholder</div>
-      <section class="section"><h2>How this tool works</h2><p>Text tools are excellent for building scale because they do not need APIs, they work on the client side, and users often return repeatedly.</p></section>
+      <section class="section"><h2>How this tool works</h2><p>Case conversion tools are among the easiest pages to monetize with low operating cost. They solve a common productivity problem and fit perfectly into a text-tools section.</p></section>
       <section class="section"><h2>Related tools</h2><div class="mini"><a class="pill" href="/tools/uae-vat-calculator/index.html">UAE VAT Calculator</a><a class="pill" href="/tools/uae-gratuity-calculator/index.html">UAE Gratuity Calculator</a><a class="pill" href="/tools/uae-salary-calculator/index.html">UAE Salary Breakdown Calculator</a><a class="pill" href="/tools/loan-calculator/index.html">Loan Calculator</a></div></section>
-      <section class="section"><h2>Frequently asked questions</h2><div class="faqs"><div class="faq-item"><h3>Does it store my text?</h3><p>No. The calculation runs in the browser.</p></div><div class="faq-item"><h3>Can it count characters too?</h3><p>Yes. It counts words, characters, sentences, and paragraphs.</p></div><div class="faq-item"><h3>Why are text tools useful for scale?</h3><p>They are cheap to run and easy to expand into many pages.</p></div></div></section>
+      <section class="section"><h2>Frequently asked questions</h2><div class="faqs"><div class="faq-item"><h3>Does the tool keep formatting?</h3><p>It keeps the raw text content but changes the letter casing.</p></div><div class="faq-item"><h3>Is title case the same as sentence case?</h3><p>No. Title case capitalizes major words, while sentence case capitalizes sentence starts.</p></div><div class="faq-item"><h3>Can this work offline after load?</h3><p>Yes. It is a client-side text transformation.</p></div></div></section>
     </div>
   </div>
 </main>
-<script>function calculate(){const text=byId('textInput').value||'';const trimmed=text.trim();const words=trimmed?trimmed.split(/\s+/).length:0;const chars=text.length;const charsNoSpaces=text.replace(/\s/g,'').length;const sentences=trimmed?trimmed.split(/[.!?]+/).filter(Boolean).length:0;const paragraphs=trimmed?trimmed.split(/\n+/).filter(Boolean).length:0;setResult(`<strong>${num(words,0)} words</strong><div class="muted">${num(chars,0)} characters · ${num(charsNoSpaces,0)} characters without spaces · ${num(sentences,0)} sentences · ${num(paragraphs,0)} paragraphs</div>`);}</script>
+<script>function titleCase(s){return s.toLowerCase().replace(/\b\w/g,c=>c.toUpperCase());}function sentenceCase(s){s=s.toLowerCase();return s.replace(/(^\s*\w|[.!?]\s*\w)/g,c=>c.toUpperCase());}function calculate(){const text=byId('caseText').value||'';const mode=byId('caseMode').value;let out=text;if(mode==='upper') out=text.toUpperCase(); if(mode==='lower') out=text.toLowerCase(); if(mode==='title') out=titleCase(text); if(mode==='sentence') out=sentenceCase(text); setResult(`<strong>Converted text</strong><div class="muted" style="margin-top:10px;white-space:pre-wrap">${out||'Nothing to convert yet.'}</div>`);}</script>
 
 <footer class="footer">
   <div class="container footer-grid">

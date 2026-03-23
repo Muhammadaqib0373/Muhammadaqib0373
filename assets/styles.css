@@ -40,4 +40,5 @@ textarea{min-height:160px} button{cursor:pointer}
 .faqs{display:grid;gap:14px}.faq-item{padding:18px}
 .footer{padding:34px 0 60px;border-top:1px solid var(--line);margin-top:30px}.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:22px}
 .footer small,.muted{color:var(--muted)} code.inline{padding:2px 8px;border-radius:8px;background:rgba(255,255,255,.05)}
+pre.adsense{white-space:pre-wrap; font-size:.9rem; color:#dbe5ff; background:rgba(255,255,255,.04); padding:16px; border-radius:16px; border:1px solid var(--line)}
 @media (max-width:980px){.hero-grid,.layout,.footer-grid,.tools-grid,.blog-grid,.form-grid,.kpi-list{grid-template-columns:1fr}.sidebar{position:relative;top:0}}

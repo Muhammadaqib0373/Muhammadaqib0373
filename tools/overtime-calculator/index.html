@@ -4,12 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Overtime Calculator | Gulf Tools Hub</title>
-<meta name="description" content="Estimate overtime pay from hourly rate and overtime hours.">
+<meta name="description" content="Estimate overtime pay using monthly salary, daily hours, overtime hours, and pay multiplier.">
 <link rel="canonical" href="https://gulftoolshub.com/tools/overtime-calculator/index.html">
 <link rel="stylesheet" href="/assets/styles.css">
 <script defer src="/assets/common.js"></script>
 </head>
 <body>
+
 <header class="topbar">
   <div class="container topbar-inner">
     <a class="brand" href="/index.html"><span class="brand-mark"></span><span>Gulf Tools Hub</span></a>
@@ -23,13 +24,10 @@
   </div>
 </header>
 
+
 <main class="container">
   <div class="layout">
-    <aside class="sidebar card">
-      <h3>More tools</h3>
-      <a class="active" href="/tools/overtime-calculator/index.html">Overtime Calculator</a>
-      <a href="/tools/uae-vat-calculator/index.html">UAE VAT Calculator</a><a href="/tools/uae-gratuity-calculator/index.html">UAE Gratuity Calculator</a><a href="/tools/uae-salary-calculator/index.html">UAE Salary Breakdown Calculator</a><a href="/tools/loan-calculator/index.html">Loan Calculator</a><a href="/tools/emi-calculator/index.html">EMI Calculator</a>
-      
+    <aside class="sidebar card"><h3>More tools</h3><a class="active" href="/tools/overtime-calculator/index.html">Overtime Calculator</a><a href="/tools/uae-vat-calculator/index.html">UAE VAT Calculator</a><a href="/tools/uae-gratuity-calculator/index.html">UAE Gratuity Calculator</a><a href="/tools/uae-salary-calculator/index.html">UAE Salary Breakdown Calculator</a><a href="/tools/loan-calculator/index.html">Loan Calculator</a><a href="/tools/emi-calculator/index.html">EMI Calculator</a>
 <div class="ad-slot">
   AdSense placeholder — replace this block after approval with your real ad unit code.
   <pre class="adsense">&lt;ins class="adsbygoogle"
@@ -41,16 +39,20 @@
 (adsbygoogle = window.adsbygoogle || []).push({});
 &lt;/script&gt;</pre>
 </div>
-
-    </aside>
+</aside>
     <div class="content-card card">
       <div class="tag">UAE Finance</div>
       <h1>Overtime Calculator</h1>
-      <p>Estimate overtime pay from hourly rate and overtime hours.</p>
+      <p>Estimate overtime pay from monthly salary, standard daily hours, extra hours worked, and the overtime multiplier you want to apply.</p>
       <section class="section" style="padding-top:8px">
-        <div class="form-grid"><div class="field"><label for="a">Hourly rate</label><input id="a" type="number" min="0" step="0.01" placeholder="30"></div><div class="field"><label for="b">Overtime hours</label><input id="b" type="number" min="0" step="0.01" placeholder="10"></div></div>
-        <div class="cta-row"><button class="btn primary" onclick="calculate()">Calculate</button><a class="btn" href="/tools/index.html">Browse all tools</a></div>
-        <div id="result" class="result"><strong>Your result will appear here.</strong><div class="muted">Enter values and click calculate.</div></div>
+        <div class="form-grid">
+          <div class="field"><label for="monthlySalary">Monthly salary</label><input id="monthlySalary" type="number" min="0" step="0.01" value="6000"></div>
+          <div class="field"><label for="dailyHours">Standard hours per day</label><input id="dailyHours" type="number" min="1" step="0.25" value="8"></div>
+          <div class="field"><label for="overtimeHours">Overtime hours</label><input id="overtimeHours" type="number" min="0" step="0.25" value="10"></div>
+          <div class="field"><label for="multiplier">Overtime multiplier</label><select id="multiplier"><option value="1.25">1.25x</option><option value="1.5">1.5x</option><option value="2">2x</option></select></div>
+        </div>
+        <div class="cta-row"><button class="btn primary" onclick="calculateOvertime()">Calculate</button><a class="btn" href="/tools/leave-salary-calculator/index.html">Leave salary</a></div>
+        <div id="result" class="result"><strong>Your overtime estimate will appear here.</strong><div class="muted">Enter your values and click calculate.</div></div>
       </section>
       
 <div class="ad-slot">
@@ -65,25 +67,39 @@
 &lt;/script&gt;</pre>
 </div>
 
-      <section class="section"><h2>How this tool works</h2><p>Overtime pages often attract workers checking pay estimates. This is a practical addition to your UAE employment calculator cluster.</p></section>
-      <section class="section"><h2>Related tools</h2><div class="mini"><a class="pill" href="/tools/uae-vat-calculator/index.html">UAE VAT Calculator</a><a class="pill" href="/tools/uae-gratuity-calculator/index.html">UAE Gratuity Calculator</a><a class="pill" href="/tools/uae-salary-calculator/index.html">UAE Salary Breakdown Calculator</a><a class="pill" href="/tools/loan-calculator/index.html">Loan Calculator</a><a class="pill" href="/tools/emi-calculator/index.html">EMI Calculator</a></div></section>
-      <section class="section"><h2>Frequently asked questions</h2><div class="faqs"><div class="faq-item"><h3>What multiplier is used?</h3><p>This starter uses 1.25x for a simple estimate.</p></div><div class="faq-item"><h3>Is it legally exact?</h3><p>No. It is an estimate and should be verified independently.</p></div><div class="faq-item"><h3>Why include employment pages?</h3><p>They build strong topical relevance in a local niche.</p></div></div></section>
+      <section class="section"><h2>How this tool works</h2><p>The page derives a rough hourly rate from monthly salary using a 30-day month and your chosen standard daily hours, then applies the overtime multiplier to the extra hours entered.</p><p>Use it for quick planning only. Actual overtime treatment can depend on employer policy, contract terms, timing, and local rules.</p></section>
+      <section class="section"><h2>Frequently asked questions</h2><div class="faqs"><div class="faq-item"><h3>Why choose a multiplier?</h3><p>Different policies may use different overtime rates for normal days, nights, or holidays.</p></div><div class="faq-item"><h3>Can I use basic salary instead of total salary?</h3><p>Yes, if that is the figure your company uses for overtime calculations.</p></div><div class="faq-item"><h3>Is this legally exact?</h3><p>No. It is a quick estimate for planning and comparison.</p></div></div></section>
     </div>
   </div>
 </main>
-<script>function calculate(){const a=parseFloat(byId('a').value||0);const b=parseFloat(byId('b').value||0);if(a<0||b<0||(!a && !b)){setResult('<strong>Enter valid values.</strong>');return;}const result=a*b*1.25;setResult(`<strong>Estimated overtime pay: ${num(result)}</strong><div class="muted">This starter applies a simple 1.25x overtime multiplier.</div>`);}</script>
+
+
+<script>
+function calculateOvertime(){
+  const monthlySalary = parseFloat(byId('monthlySalary').value || '0');
+  const dailyHours = parseFloat(byId('dailyHours').value || '0');
+  const overtimeHours = parseFloat(byId('overtimeHours').value || '0');
+  const multiplier = parseFloat(byId('multiplier').value || '1.25');
+  if(monthlySalary <= 0 || dailyHours <= 0 || overtimeHours < 0 || multiplier <= 0){ setResult('<strong>Enter valid values.</strong>'); return; }
+  const hourlyRate = monthlySalary / 30 / dailyHours;
+  const overtimePay = hourlyRate * overtimeHours * multiplier;
+  setResult(`<strong>Estimated overtime pay: ${money(overtimePay)}</strong><div class="muted">Base hourly rate: ${money(hourlyRate)} · Multiplier: ${num(multiplier,2)}x · Overtime hours: ${num(overtimeHours,2)}</div>`);
+}
+</script>
+
 
 <footer class="footer">
   <div class="container footer-grid">
     <div>
       <div class="brand"><span class="brand-mark"></span><span>Gulf Tools Hub</span></div>
       <p>Free online UAE calculators, converters, and smart tools. Calculate VAT, gratuity, salary, EMI, and more instantly. Fast, accurate, and mobile-friendly.</p>
-      <small>Domain set to https://gulftoolshub.com. Replace only the AdSense client and slot IDs after approval.</small>
+      <small>Replace the sample AdSense client and slot IDs after approval. Everything else is ready for deployment.</small>
     </div>
     <div><h3>Explore</h3><p><a href="/tools/index.html">All tools</a></p><p><a href="/blog/index.html">Blog</a></p><p><a href="/sitemap.xml">Sitemap</a></p></div>
     <div><h3>Pages</h3><p><a href="/privacy.html">Privacy Policy</a></p><p><a href="/terms.html">Terms</a></p><p><a href="/contact.html">Contact</a></p></div>
-    <div><h3>Categories</h3><p><a href="/tools/index.html#uae-finance">UAE Finance</a></p><p><a href="/tools/index.html#evergreen">Evergreen</a></p><p><a href="/tools/index.html#text-tools">Text Tools</a></p></div>
+    <div><h3>Categories</h3><p><a href="/tools/index.html#uae-finance">UAE Finance</a></p><p><a href="/tools/index.html#evergreen">Everyday tools</a></p><p><a href="/tools/index.html#text-tools">Text Tools</a></p></div>
   </div>
 </footer>
+
 </body>
 </html>

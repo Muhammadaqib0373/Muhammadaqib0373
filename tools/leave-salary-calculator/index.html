@@ -4,12 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Leave Salary Calculator | Gulf Tools Hub</title>
-<meta name="description" content="Estimate leave salary from daily rate and leave days.">
+<meta name="description" content="Estimate leave pay from monthly basic salary, leave days, and your chosen day-rate basis.">
 <link rel="canonical" href="https://gulftoolshub.com/tools/leave-salary-calculator/index.html">
 <link rel="stylesheet" href="/assets/styles.css">
 <script defer src="/assets/common.js"></script>
 </head>
 <body>
+
 <header class="topbar">
   <div class="container topbar-inner">
     <a class="brand" href="/index.html"><span class="brand-mark"></span><span>Gulf Tools Hub</span></a>
@@ -23,13 +24,10 @@
   </div>
 </header>
 
+
 <main class="container">
   <div class="layout">
-    <aside class="sidebar card">
-      <h3>More tools</h3>
-      <a class="active" href="/tools/leave-salary-calculator/index.html">Leave Salary Calculator</a>
-      <a href="/tools/uae-vat-calculator/index.html">UAE VAT Calculator</a><a href="/tools/uae-gratuity-calculator/index.html">UAE Gratuity Calculator</a><a href="/tools/uae-salary-calculator/index.html">UAE Salary Breakdown Calculator</a><a href="/tools/loan-calculator/index.html">Loan Calculator</a><a href="/tools/emi-calculator/index.html">EMI Calculator</a>
-      
+    <aside class="sidebar card"><h3>More tools</h3><a class="active" href="/tools/leave-salary-calculator/index.html">Leave Salary Calculator</a><a href="/tools/uae-vat-calculator/index.html">UAE VAT Calculator</a><a href="/tools/uae-gratuity-calculator/index.html">UAE Gratuity Calculator</a><a href="/tools/uae-salary-calculator/index.html">UAE Salary Breakdown Calculator</a><a href="/tools/loan-calculator/index.html">Loan Calculator</a><a href="/tools/emi-calculator/index.html">EMI Calculator</a>
 <div class="ad-slot">
   AdSense placeholder — replace this block after approval with your real ad unit code.
   <pre class="adsense">&lt;ins class="adsbygoogle"
@@ -41,16 +39,19 @@
 (adsbygoogle = window.adsbygoogle || []).push({});
 &lt;/script&gt;</pre>
 </div>
-
-    </aside>
+</aside>
     <div class="content-card card">
       <div class="tag">UAE Finance</div>
       <h1>Leave Salary Calculator</h1>
-      <p>Estimate leave salary from daily rate and leave days.</p>
+      <p>Estimate leave pay from monthly basic salary, leave days, and the day-rate basis you want to use for planning.</p>
       <section class="section" style="padding-top:8px">
-        <div class="form-grid"><div class="field"><label for="a">Daily salary</label><input id="a" type="number" min="0" step="0.01" placeholder="250"></div><div class="field"><label for="b">Leave days</label><input id="b" type="number" min="0" step="0.01" placeholder="15"></div></div>
-        <div class="cta-row"><button class="btn primary" onclick="calculate()">Calculate</button><a class="btn" href="/tools/index.html">Browse all tools</a></div>
-        <div id="result" class="result"><strong>Your result will appear here.</strong><div class="muted">Enter values and click calculate.</div></div>
+        <div class="form-grid">
+          <div class="field"><label for="basicSalary">Monthly basic salary</label><input id="basicSalary" type="number" min="0" step="0.01" value="8000"></div>
+          <div class="field"><label for="leaveDays">Leave days</label><input id="leaveDays" type="number" min="0" step="0.5" value="15"></div>
+          <div class="field"><label for="dayBasis">Daily rate basis</label><select id="dayBasis"><option value="30">Calendar basis (salary ÷ 30)</option><option value="26">26-day basis</option><option value="22">22-day working basis</option></select></div>
+        </div>
+        <div class="cta-row"><button class="btn primary" onclick="calculateLeaveSalary()">Calculate</button><a class="btn" href="/tools/uae-salary-calculator/index.html">Salary breakdown</a></div>
+        <div id="result" class="result"><strong>Your estimate will appear here.</strong><div class="muted">Enter your values and click calculate.</div></div>
       </section>
       
 <div class="ad-slot">
@@ -65,25 +66,38 @@
 &lt;/script&gt;</pre>
 </div>
 
-      <section class="section"><h2>How this tool works</h2><p>Leave salary tools are useful in GCC employment search clusters. This page is a natural companion to gratuity and salary breakdown calculators.</p></section>
-      <section class="section"><h2>Related tools</h2><div class="mini"><a class="pill" href="/tools/uae-vat-calculator/index.html">UAE VAT Calculator</a><a class="pill" href="/tools/uae-gratuity-calculator/index.html">UAE Gratuity Calculator</a><a class="pill" href="/tools/uae-salary-calculator/index.html">UAE Salary Breakdown Calculator</a><a class="pill" href="/tools/loan-calculator/index.html">Loan Calculator</a><a class="pill" href="/tools/emi-calculator/index.html">EMI Calculator</a></div></section>
-      <section class="section"><h2>Frequently asked questions</h2><div class="faqs"><div class="faq-item"><h3>Is this official?</h3><p>No. It is a quick estimate for planning.</p></div><div class="faq-item"><h3>Why keep it simple?</h3><p>It makes the page fast and low maintenance.</p></div><div class="faq-item"><h3>Can it be localized more?</h3><p>Yes. Add UAE examples and FAQs later.</p></div></div></section>
+      <section class="section"><h2>How this tool works</h2><p>Different employers and internal policies may use different day-rate bases when estimating leave-related pay. This tool lets you test more than one approach instead of forcing a single formula.</p><p>Use it as a quick planning estimate only and confirm the exact method from your contract, HR team, or company policy.</p></section>
+      <section class="section"><h2>Frequently asked questions</h2><div class="faqs"><div class="faq-item"><h3>Why are there multiple day-rate options?</h3><p>Organizations sometimes divide salary by 30, 26, or another internal day count.</p></div><div class="faq-item"><h3>Should I enter total salary or basic salary?</h3><p>For planning, start with monthly basic salary unless your policy specifically uses another figure.</p></div><div class="faq-item"><h3>Is this an official legal calculation?</h3><p>No. It is a simple estimate and should be checked against your actual policy.</p></div></div></section>
     </div>
   </div>
 </main>
-<script>function calculate(){const a=parseFloat(byId('a').value||0);const b=parseFloat(byId('b').value||0);if(a<0||b<0||(!a && !b)){setResult('<strong>Enter valid values.</strong>');return;}const result=a*b;setResult(`<strong>Estimated leave salary: ${num(result)}</strong><div class="muted">Multiply daily rate by number of leave days.</div>`);}</script>
+
+
+<script>
+function calculateLeaveSalary(){
+  const basicSalary = parseFloat(byId('basicSalary').value || '0');
+  const leaveDays = parseFloat(byId('leaveDays').value || '0');
+  const divisor = parseFloat(byId('dayBasis').value || '30');
+  if(basicSalary <= 0 || leaveDays < 0 || divisor <= 0){ setResult('<strong>Enter valid values.</strong>'); return; }
+  const dailyRate = basicSalary / divisor;
+  const leaveSalary = dailyRate * leaveDays;
+  setResult(`<strong>Estimated leave salary: ${money(leaveSalary)}</strong><div class="muted">Daily rate: ${money(dailyRate)} · Basis used: salary ÷ ${num(divisor,0)} · Leave days: ${num(leaveDays,1)}</div>`);
+}
+</script>
+
 
 <footer class="footer">
   <div class="container footer-grid">
     <div>
       <div class="brand"><span class="brand-mark"></span><span>Gulf Tools Hub</span></div>
       <p>Free online UAE calculators, converters, and smart tools. Calculate VAT, gratuity, salary, EMI, and more instantly. Fast, accurate, and mobile-friendly.</p>
-      <small>Domain set to https://gulftoolshub.com. Replace only the AdSense client and slot IDs after approval.</small>
+      <small>Replace the sample AdSense client and slot IDs after approval. Everything else is ready for deployment.</small>
     </div>
     <div><h3>Explore</h3><p><a href="/tools/index.html">All tools</a></p><p><a href="/blog/index.html">Blog</a></p><p><a href="/sitemap.xml">Sitemap</a></p></div>
     <div><h3>Pages</h3><p><a href="/privacy.html">Privacy Policy</a></p><p><a href="/terms.html">Terms</a></p><p><a href="/contact.html">Contact</a></p></div>
-    <div><h3>Categories</h3><p><a href="/tools/index.html#uae-finance">UAE Finance</a></p><p><a href="/tools/index.html#evergreen">Evergreen</a></p><p><a href="/tools/index.html#text-tools">Text Tools</a></p></div>
+    <div><h3>Categories</h3><p><a href="/tools/index.html#uae-finance">UAE Finance</a></p><p><a href="/tools/index.html#evergreen">Everyday tools</a></p><p><a href="/tools/index.html#text-tools">Text Tools</a></p></div>
   </div>
 </footer>
+
 </body>
 </html>

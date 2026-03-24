@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Password Generator Score Estimator | Gulf Tools Hub</title>
-<meta name="description" content="Estimate password space from length and character set size.">
+<title>Password Generator | Gulf Tools Hub</title>
+<meta name="description" content="Create a random password with custom length, character options, and a simple strength estimate.">
 <link rel="canonical" href="https://gulftoolshub.com/tools/password-generator/index.html">
 <link rel="stylesheet" href="/assets/styles.css">
 <script defer src="/assets/common.js"></script>
 </head>
 <body>
+
 <header class="topbar">
   <div class="container topbar-inner">
     <a class="brand" href="/index.html"><span class="brand-mark"></span><span>Gulf Tools Hub</span></a>
@@ -23,13 +24,10 @@
   </div>
 </header>
 
+
 <main class="container">
   <div class="layout">
-    <aside class="sidebar card">
-      <h3>More tools</h3>
-      <a class="active" href="/tools/password-generator/index.html">Password Generator Score Estimator</a>
-      <a href="/tools/uae-vat-calculator/index.html">UAE VAT Calculator</a><a href="/tools/uae-gratuity-calculator/index.html">UAE Gratuity Calculator</a><a href="/tools/uae-salary-calculator/index.html">UAE Salary Breakdown Calculator</a><a href="/tools/loan-calculator/index.html">Loan Calculator</a><a href="/tools/emi-calculator/index.html">EMI Calculator</a>
-      
+    <aside class="sidebar card"><h3>More tools</h3><a class="active" href="/tools/password-generator/index.html">Password Generator</a><a href="/tools/uae-vat-calculator/index.html">UAE VAT Calculator</a><a href="/tools/uae-gratuity-calculator/index.html">UAE Gratuity Calculator</a><a href="/tools/uae-salary-calculator/index.html">UAE Salary Breakdown Calculator</a><a href="/tools/loan-calculator/index.html">Loan Calculator</a><a href="/tools/emi-calculator/index.html">EMI Calculator</a>
 <div class="ad-slot">
   AdSense placeholder — replace this block after approval with your real ad unit code.
   <pre class="adsense">&lt;ins class="adsbygoogle"
@@ -41,16 +39,25 @@
 (adsbygoogle = window.adsbygoogle || []).push({});
 &lt;/script&gt;</pre>
 </div>
-
-    </aside>
+</aside>
     <div class="content-card card">
       <div class="tag">Text Tools</div>
-      <h1>Password Generator Score Estimator</h1>
-      <p>Estimate password space from length and character set size.</p>
+      <h1>Password Generator</h1>
+      <p>Create a random password with custom length, character rules, and a quick strength estimate. Everything runs locally in your browser.</p>
       <section class="section" style="padding-top:8px">
-        <div class="form-grid"><div class="field"><label for="a">Password length</label><input id="a" type="number" min="0" step="0.01" placeholder="12"></div><div class="field"><label for="b">Character set size</label><input id="b" type="number" min="0" step="0.01" placeholder="62"></div></div>
-        <div class="cta-row"><button class="btn primary" onclick="calculate()">Calculate</button><a class="btn" href="/tools/index.html">Browse all tools</a></div>
-        <div id="result" class="result"><strong>Your result will appear here.</strong><div class="muted">Enter values and click calculate.</div></div>
+        <div class="form-grid">
+          <div class="field"><label for="length">Password length</label><input id="length" type="number" min="4" max="64" step="1" value="16"></div>
+          <div class="field"><label for="count">How many passwords?</label><select id="count"><option>1</option><option>3</option><option>5</option></select></div>
+        </div>
+        <div class="checkbox-row">
+          <label class="checkbox"><input id="lower" type="checkbox" checked> Lowercase</label>
+          <label class="checkbox"><input id="upper" type="checkbox" checked> Uppercase</label>
+          <label class="checkbox"><input id="numbers" type="checkbox" checked> Numbers</label>
+          <label class="checkbox"><input id="symbols" type="checkbox"> Symbols</label>
+          <label class="checkbox"><input id="avoid" type="checkbox"> Avoid similar characters</label>
+        </div>
+        <div class="cta-row"><button class="btn primary" onclick="generatePasswords()">Generate</button><button class="btn" onclick="copyFirstPassword()">Copy first password</button></div>
+        <div id="result" class="result"><strong>Your password will appear here.</strong><div class="muted">Choose your settings and click generate.</div></div>
       </section>
       
 <div class="ad-slot">
@@ -65,25 +72,84 @@
 &lt;/script&gt;</pre>
 </div>
 
-      <section class="section"><h2>How this tool works</h2><p>Password-related pages can attract broad utility traffic. This starter version is a simple estimator rather than a random generator, keeping the code lightweight and fast.</p></section>
-      <section class="section"><h2>Related tools</h2><div class="mini"><a class="pill" href="/tools/uae-vat-calculator/index.html">UAE VAT Calculator</a><a class="pill" href="/tools/uae-gratuity-calculator/index.html">UAE Gratuity Calculator</a><a class="pill" href="/tools/uae-salary-calculator/index.html">UAE Salary Breakdown Calculator</a><a class="pill" href="/tools/loan-calculator/index.html">Loan Calculator</a><a class="pill" href="/tools/emi-calculator/index.html">EMI Calculator</a></div></section>
-      <section class="section"><h2>Frequently asked questions</h2><div class="faqs"><div class="faq-item"><h3>Does it generate a password?</h3><p>This page estimates password space; you can add a generator later.</p></div><div class="faq-item"><h3>Why include security tools?</h3><p>They broaden utility coverage and attract general traffic.</p></div><div class="faq-item"><h3>Is this lightweight?</h3><p>Yes. It runs entirely client-side.</p></div></div></section>
+      <section class="section"><h2>How this tool works</h2><p>This page now generates real random passwords in the browser instead of only estimating possible combinations. You can choose the character groups you want, control the length, and optionally avoid confusing characters like <span class="mono">O</span>, <span class="mono">0</span>, <span class="mono">l</span>, and <span class="mono">1</span>.</p><p>The strength estimate is a simple guide based on length and the size of the character pool. It is useful for rough comparison, but your exact security depends on where and how the password is used.</p></section>
+      <section class="section"><h2>Frequently asked questions</h2><div class="faqs"><div class="faq-item"><h3>Is the password sent anywhere?</h3><p>No. The generator runs entirely in your browser.</p></div><div class="faq-item"><h3>Should I use symbols?</h3><p>Usually yes, unless a specific site blocks them.</p></div><div class="faq-item"><h3>What length is a good default?</h3><p>For most accounts, 14 to 20 characters is a strong starting point.</p></div></div></section>
     </div>
   </div>
 </main>
-<script>function calculate(){const a=parseFloat(byId('a').value||0);const b=parseFloat(byId('b').value||0);if(a<0||b<0||(!a && !b)){setResult('<strong>Enter valid values.</strong>');return;}const result=Math.pow(b,a);setResult(`<strong>Possible combinations: ${num(result)}</strong><div class="muted">This is a simple estimator that shows how large the password space can be.</div>`);}</script>
+
+
+<script>
+let latestPasswords = [];
+function buildCharset(){
+  let lower = 'abcdefghijklmnopqrstuvwxyz';
+  let upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  let numbers = '0123456789';
+  let symbols = '!@#$%^&*()-_=+[]{};:,.?/';
+  if(byId('avoid').checked){
+    const bad = /[O0Il1]/g;
+    lower = lower.replace(bad,'');
+    upper = upper.replace(bad,'');
+    numbers = numbers.replace(bad,'');
+  }
+  let pool = '';
+  if(byId('lower').checked) pool += lower;
+  if(byId('upper').checked) pool += upper;
+  if(byId('numbers').checked) pool += numbers;
+  if(byId('symbols').checked) pool += symbols;
+  return pool;
+}
+function randomIndex(max){
+  const arr = new Uint32Array(1);
+  window.crypto.getRandomValues(arr);
+  return arr[0] % max;
+}
+function scoreLabel(length, pool){
+  const entropy = length * Math.log2(pool || 1);
+  if(entropy < 40) return ['Basic', entropy];
+  if(entropy < 60) return ['Good', entropy];
+  if(entropy < 80) return ['Strong', entropy];
+  return ['Very strong', entropy];
+}
+function generatePasswords(){
+  const length = parseInt(byId('length').value || '0', 10);
+  const count = parseInt(byId('count').value || '1', 10);
+  const pool = buildCharset();
+  if(length < 4 || length > 64){ setResult('<strong>Choose a length between 4 and 64.</strong>'); return; }
+  if(!pool){ setResult('<strong>Select at least one character type.</strong>'); return; }
+  latestPasswords = [];
+  for(let i=0;i<count;i++){
+    let pwd = '';
+    for(let j=0;j<length;j++) pwd += pool[randomIndex(pool.length)];
+    latestPasswords.push(pwd);
+  }
+  const info = scoreLabel(length, pool.length);
+  const list = latestPasswords.map(p => `<div class="mono" style="margin-top:10px">${escapeHtml(p)}</div>`).join('');
+  setResult(`<strong>${info[0]} password setup</strong><div class="muted">Pool size: ${pool.length} characters · Estimated entropy: ${num(info[1],1)} bits</div>${list}`);
+}
+async function copyFirstPassword(){
+  if(!latestPasswords.length){ generatePasswords(); }
+  if(!latestPasswords.length) return;
+  const ok = await copyText(latestPasswords[0]);
+  const msg = ok ? 'Copied the first password to your clipboard.' : 'Copy failed in this browser. Please copy it manually from the result box.';
+  const box = byId('result');
+  box.innerHTML += `<div class="muted" style="margin-top:12px">${msg}</div>`;
+}
+</script>
+
 
 <footer class="footer">
   <div class="container footer-grid">
     <div>
       <div class="brand"><span class="brand-mark"></span><span>Gulf Tools Hub</span></div>
       <p>Free online UAE calculators, converters, and smart tools. Calculate VAT, gratuity, salary, EMI, and more instantly. Fast, accurate, and mobile-friendly.</p>
-      <small>Domain set to https://gulftoolshub.com. Replace only the AdSense client and slot IDs after approval.</small>
+      <small>Replace the sample AdSense client and slot IDs after approval. Everything else is ready for deployment.</small>
     </div>
     <div><h3>Explore</h3><p><a href="/tools/index.html">All tools</a></p><p><a href="/blog/index.html">Blog</a></p><p><a href="/sitemap.xml">Sitemap</a></p></div>
     <div><h3>Pages</h3><p><a href="/privacy.html">Privacy Policy</a></p><p><a href="/terms.html">Terms</a></p><p><a href="/contact.html">Contact</a></p></div>
-    <div><h3>Categories</h3><p><a href="/tools/index.html#uae-finance">UAE Finance</a></p><p><a href="/tools/index.html#evergreen">Evergreen</a></p><p><a href="/tools/index.html#text-tools">Text Tools</a></p></div>
+    <div><h3>Categories</h3><p><a href="/tools/index.html#uae-finance">UAE Finance</a></p><p><a href="/tools/index.html#evergreen">Everyday tools</a></p><p><a href="/tools/index.html#text-tools">Text Tools</a></p></div>
   </div>
 </footer>
+
 </body>
 </html>

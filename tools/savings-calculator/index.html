@@ -4,12 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Savings Calculator | Gulf Tools Hub</title>
-<meta name="description" content="Estimate future savings from monthly contributions.">
+<meta name="description" content="Project savings growth with an opening balance, monthly contributions, and an optional annual return.">
 <link rel="canonical" href="https://gulftoolshub.com/tools/savings-calculator/index.html">
 <link rel="stylesheet" href="/assets/styles.css">
 <script defer src="/assets/common.js"></script>
 </head>
 <body>
+
 <header class="topbar">
   <div class="container topbar-inner">
     <a class="brand" href="/index.html"><span class="brand-mark"></span><span>Gulf Tools Hub</span></a>
@@ -23,13 +24,10 @@
   </div>
 </header>
 
+
 <main class="container">
   <div class="layout">
-    <aside class="sidebar card">
-      <h3>More tools</h3>
-      <a class="active" href="/tools/savings-calculator/index.html">Savings Calculator</a>
-      <a href="/tools/uae-vat-calculator/index.html">UAE VAT Calculator</a><a href="/tools/uae-gratuity-calculator/index.html">UAE Gratuity Calculator</a><a href="/tools/uae-salary-calculator/index.html">UAE Salary Breakdown Calculator</a><a href="/tools/loan-calculator/index.html">Loan Calculator</a><a href="/tools/emi-calculator/index.html">EMI Calculator</a>
-      
+    <aside class="sidebar card"><h3>More tools</h3><a class="active" href="/tools/savings-calculator/index.html">Savings Calculator</a><a href="/tools/uae-vat-calculator/index.html">UAE VAT Calculator</a><a href="/tools/uae-gratuity-calculator/index.html">UAE Gratuity Calculator</a><a href="/tools/uae-salary-calculator/index.html">UAE Salary Breakdown Calculator</a><a href="/tools/loan-calculator/index.html">Loan Calculator</a><a href="/tools/emi-calculator/index.html">EMI Calculator</a>
 <div class="ad-slot">
   AdSense placeholder — replace this block after approval with your real ad unit code.
   <pre class="adsense">&lt;ins class="adsbygoogle"
@@ -41,16 +39,20 @@
 (adsbygoogle = window.adsbygoogle || []).push({});
 &lt;/script&gt;</pre>
 </div>
-
-    </aside>
+</aside>
     <div class="content-card card">
       <div class="tag">Finance</div>
       <h1>Savings Calculator</h1>
-      <p>Estimate future savings from monthly contributions.</p>
+      <p>Project how your savings can grow with an opening balance, regular monthly deposits, and an optional annual return rate.</p>
       <section class="section" style="padding-top:8px">
-        <div class="form-grid"><div class="field"><label for="a">Monthly contribution</label><input id="a" type="number" min="0" step="0.01" placeholder="500"></div><div class="field"><label for="b">Number of months</label><input id="b" type="number" min="0" step="0.01" placeholder="24"></div></div>
-        <div class="cta-row"><button class="btn primary" onclick="calculate()">Calculate</button><a class="btn" href="/tools/index.html">Browse all tools</a></div>
-        <div id="result" class="result"><strong>Your result will appear here.</strong><div class="muted">Enter values and click calculate.</div></div>
+        <div class="form-grid">
+          <div class="field"><label for="opening">Opening balance</label><input id="opening" type="number" min="0" step="0.01" value="0"></div>
+          <div class="field"><label for="monthly">Monthly contribution</label><input id="monthly" type="number" min="0" step="0.01" value="500"></div>
+          <div class="field"><label for="savingYears">Years to save</label><input id="savingYears" type="number" min="0" step="0.1" value="5"></div>
+          <div class="field"><label for="savingRate">Annual return rate (%)</label><input id="savingRate" type="number" min="0" step="0.01" value="0"></div>
+        </div>
+        <div class="cta-row"><button class="btn primary" onclick="calculateSavings()">Calculate</button><a class="btn" href="/tools/compound-interest-calculator/index.html">Need compounding details?</a></div>
+        <div id="result" class="result"><strong>Your savings estimate will appear here.</strong><div class="muted">Enter your values and click calculate.</div></div>
       </section>
       
 <div class="ad-slot">
@@ -65,25 +67,43 @@
 &lt;/script&gt;</pre>
 </div>
 
-      <section class="section"><h2>How this tool works</h2><p>A savings calculator attracts users planning emergency funds and future purchases. It also makes a natural link partner for salary, loan, and EMI pages.</p></section>
-      <section class="section"><h2>Related tools</h2><div class="mini"><a class="pill" href="/tools/uae-vat-calculator/index.html">UAE VAT Calculator</a><a class="pill" href="/tools/uae-gratuity-calculator/index.html">UAE Gratuity Calculator</a><a class="pill" href="/tools/uae-salary-calculator/index.html">UAE Salary Breakdown Calculator</a><a class="pill" href="/tools/loan-calculator/index.html">Loan Calculator</a><a class="pill" href="/tools/emi-calculator/index.html">EMI Calculator</a></div></section>
-      <section class="section"><h2>Frequently asked questions</h2><div class="faqs"><div class="faq-item"><h3>Does this include interest?</h3><p>This starter version is a simple estimate without interest.</p></div><div class="faq-item"><h3>Why keep it simple?</h3><p>Simple tools load fast and are easier to maintain.</p></div><div class="faq-item"><h3>Can I add compound growth later?</h3><p>Yes. That is a strong premium expansion.</p></div></div></section>
+      <section class="section"><h2>How this tool works</h2><p>If you leave the return rate at 0%, the result becomes a simple contribution planner. Add a rate when you want a growth estimate. This makes the page useful for both cash-saving goals and basic investing scenarios.</p></section>
+      <section class="section"><h2>Frequently asked questions</h2><div class="faqs"><div class="faq-item"><h3>Do I need to enter a rate?</h3><p>No. Leave it at 0% for a plain savings plan.</p></div><div class="faq-item"><h3>Can I use this for emergency funds?</h3><p>Yes. It is good for goal-based planning such as emergency savings or travel funds.</p></div><div class="faq-item"><h3>Is this the same as the compound interest calculator?</h3><p>It is simpler. Use the compound interest page when you want compounding frequency controls.</p></div></div></section>
     </div>
   </div>
 </main>
-<script>function calculate(){const a=parseFloat(byId('a').value||0);const b=parseFloat(byId('b').value||0);if(a<0||b<0||(!a && !b)){setResult('<strong>Enter valid values.</strong>');return;}const result=a*b;setResult(`<strong>Estimated saved total: ${num(result)}</strong><div class="muted">This simplified version multiplies monthly savings by the number of months.</div>`);}</script>
+
+
+<script>
+function calculateSavings(){
+  const opening = parseFloat(byId('opening').value || '0');
+  const monthly = parseFloat(byId('monthly').value || '0');
+  const years = parseFloat(byId('savingYears').value || '0');
+  const annualRate = parseFloat(byId('savingRate').value || '0') / 100;
+  if(opening < 0 || monthly < 0 || years <= 0 || annualRate < 0){ setResult('<strong>Enter valid values.</strong>'); return; }
+  const months = Math.round(years * 12);
+  const monthlyRate = annualRate / 12;
+  const openingGrowth = opening * Math.pow(1 + monthlyRate, months);
+  const depositGrowth = monthlyRate === 0 ? monthly * months : monthly * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate);
+  const total = openingGrowth + depositGrowth;
+  const deposited = opening + (monthly * months);
+  setResult(`<strong>Projected savings total: ${money(total)}</strong><div class="muted">Total deposited: ${money(deposited)} · Estimated growth: ${money(total - deposited)} · Period: ${months} months</div>`);
+}
+</script>
+
 
 <footer class="footer">
   <div class="container footer-grid">
     <div>
       <div class="brand"><span class="brand-mark"></span><span>Gulf Tools Hub</span></div>
       <p>Free online UAE calculators, converters, and smart tools. Calculate VAT, gratuity, salary, EMI, and more instantly. Fast, accurate, and mobile-friendly.</p>
-      <small>Domain set to https://gulftoolshub.com. Replace only the AdSense client and slot IDs after approval.</small>
+      <small>Replace the sample AdSense client and slot IDs after approval. Everything else is ready for deployment.</small>
     </div>
     <div><h3>Explore</h3><p><a href="/tools/index.html">All tools</a></p><p><a href="/blog/index.html">Blog</a></p><p><a href="/sitemap.xml">Sitemap</a></p></div>
     <div><h3>Pages</h3><p><a href="/privacy.html">Privacy Policy</a></p><p><a href="/terms.html">Terms</a></p><p><a href="/contact.html">Contact</a></p></div>
-    <div><h3>Categories</h3><p><a href="/tools/index.html#uae-finance">UAE Finance</a></p><p><a href="/tools/index.html#evergreen">Evergreen</a></p><p><a href="/tools/index.html#text-tools">Text Tools</a></p></div>
+    <div><h3>Categories</h3><p><a href="/tools/index.html#uae-finance">UAE Finance</a></p><p><a href="/tools/index.html#evergreen">Everyday tools</a></p><p><a href="/tools/index.html#text-tools">Text Tools</a></p></div>
   </div>
 </footer>
+
 </body>
 </html>

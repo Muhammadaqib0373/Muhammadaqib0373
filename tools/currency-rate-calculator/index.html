@@ -4,12 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Currency Rate Calculator | Gulf Tools Hub</title>
-<meta name="description" content="Apply a manual exchange rate to convert between two amounts.">
+<meta name="description" content="Convert currencies in either direction using a manual exchange rate.">
 <link rel="canonical" href="https://gulftoolshub.com/tools/currency-rate-calculator/index.html">
 <link rel="stylesheet" href="/assets/styles.css">
 <script defer src="/assets/common.js"></script>
 </head>
 <body>
+
 <header class="topbar">
   <div class="container topbar-inner">
     <a class="brand" href="/index.html"><span class="brand-mark"></span><span>Gulf Tools Hub</span></a>
@@ -23,13 +24,10 @@
   </div>
 </header>
 
+
 <main class="container">
   <div class="layout">
-    <aside class="sidebar card">
-      <h3>More tools</h3>
-      <a class="active" href="/tools/currency-rate-calculator/index.html">Currency Rate Calculator</a>
-      <a href="/tools/uae-vat-calculator/index.html">UAE VAT Calculator</a><a href="/tools/uae-gratuity-calculator/index.html">UAE Gratuity Calculator</a><a href="/tools/uae-salary-calculator/index.html">UAE Salary Breakdown Calculator</a><a href="/tools/loan-calculator/index.html">Loan Calculator</a><a href="/tools/emi-calculator/index.html">EMI Calculator</a>
-      
+    <aside class="sidebar card"><h3>More tools</h3><a class="active" href="/tools/currency-rate-calculator/index.html">Currency Rate Calculator</a><a href="/tools/uae-vat-calculator/index.html">UAE VAT Calculator</a><a href="/tools/uae-gratuity-calculator/index.html">UAE Gratuity Calculator</a><a href="/tools/uae-salary-calculator/index.html">UAE Salary Breakdown Calculator</a><a href="/tools/loan-calculator/index.html">Loan Calculator</a><a href="/tools/emi-calculator/index.html">EMI Calculator</a>
 <div class="ad-slot">
   AdSense placeholder — replace this block after approval with your real ad unit code.
   <pre class="adsense">&lt;ins class="adsbygoogle"
@@ -41,16 +39,21 @@
 (adsbygoogle = window.adsbygoogle || []).push({});
 &lt;/script&gt;</pre>
 </div>
-
-    </aside>
+</aside>
     <div class="content-card card">
       <div class="tag">Finance</div>
       <h1>Currency Rate Calculator</h1>
-      <p>Apply a manual exchange rate to convert between two amounts.</p>
+      <p>Convert money in either direction with a manual exchange rate. Use it when you already know the rate from your bank, exchange house, invoice, or travel quote.</p>
       <section class="section" style="padding-top:8px">
-        <div class="form-grid"><div class="field"><label for="a">Amount</label><input id="a" type="number" min="0" step="0.01" placeholder="100"></div><div class="field"><label for="b">Exchange rate</label><input id="b" type="number" min="0" step="0.01" placeholder="3.67"></div></div>
-        <div class="cta-row"><button class="btn primary" onclick="calculate()">Calculate</button><a class="btn" href="/tools/index.html">Browse all tools</a></div>
-        <div id="result" class="result"><strong>Your result will appear here.</strong><div class="muted">Enter values and click calculate.</div></div>
+        <div class="form-grid">
+          <div class="field"><label for="amount">Amount</label><input id="amount" type="number" min="0" step="0.01" value="100"></div>
+          <div class="field"><label for="rate">Exchange rate</label><input id="rate" type="number" min="0.000001" step="0.000001" value="3.6725"></div>
+          <div class="field"><label for="fromCode">From currency code</label><input id="fromCode" type="text" maxlength="6" value="USD"></div>
+          <div class="field"><label for="toCode">To currency code</label><input id="toCode" type="text" maxlength="6" value="AED"></div>
+          <div class="field"><label for="direction">Rate meaning</label><select id="direction"><option value="multiply">1 from-currency = rate to-currency</option><option value="divide">1 to-currency = rate from-currency</option></select></div>
+        </div>
+        <div class="cta-row"><button class="btn primary" onclick="calculateCurrency()">Convert</button><button class="btn" onclick="swapCurrencies()">Swap direction</button></div>
+        <div id="result" class="result"><strong>Your conversion will appear here.</strong><div class="muted">Enter the amount and manual exchange rate, then click convert.</div></div>
       </section>
       
 <div class="ad-slot">
@@ -65,25 +68,49 @@
 &lt;/script&gt;</pre>
 </div>
 
-      <section class="section"><h2>How this tool works</h2><p>This is a manual rate calculator rather than a live currency feed, which makes it lightweight and reliable for static hosting. It still solves a common practical need.</p></section>
-      <section class="section"><h2>Related tools</h2><div class="mini"><a class="pill" href="/tools/uae-vat-calculator/index.html">UAE VAT Calculator</a><a class="pill" href="/tools/uae-gratuity-calculator/index.html">UAE Gratuity Calculator</a><a class="pill" href="/tools/uae-salary-calculator/index.html">UAE Salary Breakdown Calculator</a><a class="pill" href="/tools/loan-calculator/index.html">Loan Calculator</a><a class="pill" href="/tools/emi-calculator/index.html">EMI Calculator</a></div></section>
-      <section class="section"><h2>Frequently asked questions</h2><div class="faqs"><div class="faq-item"><h3>Does it use live rates?</h3><p>No. You enter the exchange rate manually.</p></div><div class="faq-item"><h3>Why not use an API?</h3><p>Static tools are cheaper and easier to maintain.</p></div><div class="faq-item"><h3>Is manual conversion still useful?</h3><p>Yes. Many users just need a quick estimate.</p></div></div></section>
+      <section class="section"><h2>How this tool works</h2><p>This is a manual-rate converter, which means you control the exchange rate. That is useful when you are comparing cash exchange counters, checking invoice conversions, or using a company-set accounting rate instead of a live market feed.</p></section>
+      <section class="section"><h2>Frequently asked questions</h2><div class="faqs"><div class="faq-item"><h3>Does it use live market data?</h3><p>No. You must enter the rate yourself.</p></div><div class="faq-item"><h3>Why show the inverse rate?</h3><p>It helps you sanity-check whether the rate direction is correct.</p></div><div class="faq-item"><h3>Can I swap currencies quickly?</h3><p>Yes. Use the swap button to flip the labels and conversion direction.</p></div></div></section>
     </div>
   </div>
 </main>
-<script>function calculate(){const a=parseFloat(byId('a').value||0);const b=parseFloat(byId('b').value||0);if(a<0||b<0||(!a && !b)){setResult('<strong>Enter valid values.</strong>');return;}const result=a*b;setResult(`<strong>Converted amount: ${num(result)}</strong><div class="muted">Enter an amount and the exchange rate to estimate a converted total.</div>`);}</script>
+
+
+<script>
+function normalizeCode(value){ return String(value || '').toUpperCase().replace(/[^A-Z]/g,'').slice(0,6) || 'CUR'; }
+function calculateCurrency(){
+  const amount = parseFloat(byId('amount').value || '0');
+  const rate = parseFloat(byId('rate').value || '0');
+  const fromCode = normalizeCode(byId('fromCode').value);
+  const toCode = normalizeCode(byId('toCode').value);
+  const direction = byId('direction').value;
+  if(amount < 0 || rate <= 0){ setResult('<strong>Enter a valid amount and exchange rate.</strong>'); return; }
+  const converted = direction === 'multiply' ? amount * rate : amount / rate;
+  const inverse = 1 / rate;
+  setResult(`<strong>${num(amount)} ${fromCode} = ${num(converted)} ${toCode}</strong><div class="muted">Inverse rate: 1 ${toCode} = ${num(inverse,6)} ${fromCode}</div>`);
+}
+function swapCurrencies(){
+  const from = byId('fromCode').value;
+  const to = byId('toCode').value;
+  byId('fromCode').value = to;
+  byId('toCode').value = from;
+  byId('direction').value = byId('direction').value === 'multiply' ? 'divide' : 'multiply';
+  calculateCurrency();
+}
+</script>
+
 
 <footer class="footer">
   <div class="container footer-grid">
     <div>
       <div class="brand"><span class="brand-mark"></span><span>Gulf Tools Hub</span></div>
       <p>Free online UAE calculators, converters, and smart tools. Calculate VAT, gratuity, salary, EMI, and more instantly. Fast, accurate, and mobile-friendly.</p>
-      <small>Domain set to https://gulftoolshub.com. Replace only the AdSense client and slot IDs after approval.</small>
+      <small>Replace the sample AdSense client and slot IDs after approval. Everything else is ready for deployment.</small>
     </div>
     <div><h3>Explore</h3><p><a href="/tools/index.html">All tools</a></p><p><a href="/blog/index.html">Blog</a></p><p><a href="/sitemap.xml">Sitemap</a></p></div>
     <div><h3>Pages</h3><p><a href="/privacy.html">Privacy Policy</a></p><p><a href="/terms.html">Terms</a></p><p><a href="/contact.html">Contact</a></p></div>
-    <div><h3>Categories</h3><p><a href="/tools/index.html#uae-finance">UAE Finance</a></p><p><a href="/tools/index.html#evergreen">Evergreen</a></p><p><a href="/tools/index.html#text-tools">Text Tools</a></p></div>
+    <div><h3>Categories</h3><p><a href="/tools/index.html#uae-finance">UAE Finance</a></p><p><a href="/tools/index.html#evergreen">Everyday tools</a></p><p><a href="/tools/index.html#text-tools">Text Tools</a></p></div>
   </div>
 </footer>
+
 </body>
 </html>
